@@ -39,8 +39,8 @@ export default function PokemonList() {
             <Image
               src={pokemon.sprites.front_default}
               alt={pokemon.korean_name}
-              width={100}
-              height={100}
+              width={150}
+              height={150}
             />
           </figure>
           {/* </Link> */}
