@@ -4,6 +4,7 @@ import axios from "axios";
 import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
+import { Pokemon } from "@/types/pokemonType";
 
 export default function PokemonList() {
   const [pokemons, setPokemons] = useState([]);
@@ -23,7 +24,7 @@ export default function PokemonList() {
 
   return (
     <section>
-      {pokemons.map((pokemon) => (
+      {pokemons.map((pokemon: Pokemon) => (
         <div className="card bg-base-100 w-36 shadow-xl" key={pokemon.id}>
           {/* <Link href={`/pokemon/${pokemon.id}`}> */}
           <div className="card-body">
