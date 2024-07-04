@@ -26,7 +26,6 @@ export const GET = async (request: Request) => {
         return { ...response.data, korean_name: koreanName?.name || null };
       }
     );
-
     return NextResponse.json(allPokemonData);
   } catch (error) {
     return NextResponse.json({ error: "Failed to fetch data" });
