@@ -1,9 +1,10 @@
 import fetchPokemonData from "@/api/fetchPokemonData";
 import Link from "next/link";
 import Image from "next/image";
+import { Pokemon } from "@/types/pokemonType";
 
 const PokemonDetailPage = async ({ params }: { params: { id: number } }) => {
-  const pokemon = await fetchPokemonData(params.id);
+  const pokemon: Pokemon = await fetchPokemonData(params.id);
 
   return (
     <div className="max-w-md mx-auto overflow-hidden md:max-w-2xl p-8">
