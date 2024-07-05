@@ -13,7 +13,6 @@ export default function PokemonList() {
     const getPokemonData = async () => {
       try {
         const response = await axios.get("/api/pokemons");
-        console.log(response.data);
         setPokemons(response.data);
       } catch (error) {
         console.log("데이터를 불러오지 못했습니다.");
@@ -29,7 +28,7 @@ export default function PokemonList() {
           className="card bg-base-100 w-40 shadow-xl text-black"
           key={pokemon.id}
         >
-          {/* <Link href={`/pokemon/${pokemon.id}`}> */}
+          <Link href={`/pokemon/${pokemon.id}`}>
           <div className="card-body">
             <h2 className="card-title">{pokemon.korean_name}</h2>
             <h3>{pokemon.name}</h3>
@@ -43,7 +42,7 @@ export default function PokemonList() {
               height={150}
             />
           </figure>
-          {/* </Link> */}
+          </Link>
         </div>
       ))}
     </section>
