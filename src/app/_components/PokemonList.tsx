@@ -5,28 +5,38 @@ import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import { Pokemon } from "@/types/pokemonType";
+import Loading from "../loading";
 
-export default function PokemonList() {
+const PokemonList = () => {
   const [pokemons, setPokemons] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState();
 
   useEffect(() => {
     const getPokemonData = async () => {
       try {
         const response = await axios.get("/api/pokemons");
         setPokemons(response.data);
+        setLoading(false);
       } catch (error) {
         console.log("데이터를 불러오지 못했습니다.");
+        setLoading(false);
       }
     };
+    console.log(pokemons);
     getPokemonData();
   }, []);
+
+  if (loading) {
+    return <Loading />;
+  }
 
   return (
     <div className="px-40 md:px-64 lg:px-80 xl:px-96 py-8">
       <section className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-y-6 gap-x-1">
         {pokemons.map((pokemon: Pokemon) => (
           <div
-            className="card bg-base-100 w-full max-w-[12rem] mx-auto shadow-xl border-gray-100 text-black transition-transform transform hover:scale-105 hover:shadow-2xl"
+            className="card bg-base-100 w-full max-w-[12rem] mx-auto shadow-xl border border-gray-100 text-black transition-transform transform hover:scale-105 hover:shadow-2xl"
             key={pokemon.id}
           >
             <Link href={`/pokemon/${pokemon.id}`}>
@@ -50,4 +60,6 @@ export default function PokemonList() {
       </section>
     </div>
   );
-}
+};
+
+export default PokemonList;

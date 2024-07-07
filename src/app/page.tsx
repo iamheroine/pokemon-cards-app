@@ -1,6 +1,6 @@
 import PokemonList from "./_components/PokemonList";
 
-export default function Home() {
+const Home = () => {
   
 
   return (
@@ -9,3 +9,5 @@ export default function Home() {
     </>
   );
 }
+
+export default Home
