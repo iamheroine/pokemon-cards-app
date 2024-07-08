@@ -6,11 +6,12 @@ import Image from "next/image";
 import Link from "next/link";
 import { Pokemon } from "@/types/pokemonType";
 import Loading from "../loading";
+import GlobalError from "../error";
 
 const PokemonList = () => {
-  const [pokemons, setPokemons] = useState([]);
+  const [pokemons, setPokemons] = useState<Pokemon[]>([]);
   const [loading, setLoading] = useState(true);
-  const [error, setError] = useState();
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const getPokemonData = async () => {
@@ -20,6 +21,11 @@ const PokemonList = () => {
         setLoading(false);
       } catch (error) {
         console.log("데이터를 불러오지 못했습니다.");
+        if (axios.isAxiosError(error)) {
+          setError(error.message);
+        } else {
+          setError('An unknown error occurred');
+        }
         setLoading(false);
       }
     };
@@ -29,6 +35,10 @@ const PokemonList = () => {
 
   if (loading) {
     return <Loading />;
+  }
+
+  if (error) {
+    return <GlobalError error={error} />;
   }
 
   return (
